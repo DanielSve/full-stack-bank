@@ -1,0 +1,68 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="danielsvensson (generated)" id="1687685647885-1">
+        <createTable tableName="account">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="account_nr" type="BIGINT"/>
+            <column name="balance" type="DOUBLE"/>
+            <column name="accounts_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-2">
+        <createTable tableName="account_seq">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-3">
+        <createTable tableName="transaction">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="amount" type="DOUBLE"/>
+            <column name="timestamp" type="datetime"/>
+            <column name="transaction_type" type="TINYINT(3)"/>
+            <column name="account_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-4">
+        <createTable tableName="transaction_seq">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-5">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="ssn" type="VARCHAR(11)">
+                <constraints unique="true"/>
+            </column>
+            <column name="role" type="ENUM(5)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-6">
+        <createTable tableName="user_seq">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-7">
+        <createIndex indexName="FK164x26j2r20uu0txblyx6q6hi" tableName="transaction">
+            <column name="account_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-8">
+        <createIndex indexName="FKih7nyorgp1xhn34qp5rr0b8oy" tableName="account">
+            <column name="accounts_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-9">
+        <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="transaction" constraintName="FK164x26j2r20uu0txblyx6q6hi" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="account" validate="true"/>
+    </changeSet>
+    <changeSet author="danielsvensson (generated)" id="1687685647885-10">
+        <addForeignKeyConstraint baseColumnNames="accounts_id" baseTableName="account" constraintName="FKih7nyorgp1xhn34qp5rr0b8oy" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
